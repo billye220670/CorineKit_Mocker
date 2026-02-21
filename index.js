@@ -596,6 +596,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 处理媒体元素源节点
             if (audioSourceConnected) {
+                // 先断开旧的媒体源节点，防止节点在音频图中持续积累
+                if (mediaElementSource) {
+                    try { mediaElementSource.disconnect(); } catch(e) {}
+                    mediaElementSource = null;
+                }
                 // 重置音��元素，让它不再连接到Web Audio API
                 audioPlayer.pause();
                 audioPlayer = new Audio(); // 创建新的音频元素
@@ -703,6 +708,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     const volume = masterVolume;
                     const url = selectedFile.url;
 
+                    // 先断开旧的媒体源节点，防止节点在音频图中持续积累
+                    if (playerToUse.mediaSource) {
+                        try { playerToUse.mediaSource.disconnect(); } catch(e) {}
+                        playerToUse.mediaSource = null;
+                    }
                     // 创建全新的音频元素替换旧的
                     playerToUse.audio.pause();
                     playerToUse.audio = new Audio();
@@ -769,6 +779,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // 处理媒体元素源节点
                 if (audioSourceConnected) {
+                    // 先断开旧的媒体源节点，防止节点在音频图中持续积累
+                    if (mediaElementSource) {
+                        try { mediaElementSource.disconnect(); } catch(e) {}
+                        mediaElementSource = null;
+                    }
                     // 重置音频元素，让它不再连接到Web Audio API
                     audioPlayer.pause();
                     audioPlayer = new Audio(); // 创建新的音频元素
